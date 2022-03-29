@@ -1,0 +1,14 @@
+{
+  "name": "proxy-render",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "scripts": {
+    "test": "node  --experimental-modules test.js"
+  },
+  "author": "TBXark",
+  "license": "MIT",
+  "devDependencies": {
+    "zx": "^6.0.7"
+  }
+}
