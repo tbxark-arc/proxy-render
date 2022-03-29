@@ -128,3 +128,24 @@ export async function vmessBase64ToProxies(url) {
       };
     });
 }
+
+
+export async function fetchProxies(type, url) {
+  switch (type) {
+    case "surge-ss": {
+      return await surgeRawConfigToProxies(url);
+    }
+    case "ssr": {
+      return await ssrBase64ToProxies(url);
+    }
+    case "trojan": {
+      return await trojanBase64ToProxies(url);
+    }
+    case "vmess": {
+      return await vmessBase64ToProxies(url);
+    }
+    default: {
+      return [];
+    }
+  }
+}

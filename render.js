@@ -110,7 +110,7 @@ export const render = (file, nameRender, proxies) => {
       }
     })
     .filter((c) => c != null)
-    .join("\n");
+    .join(file === "clash" ? "" : "\n");
 
   if (file === "clash") {
     return "proxies:\n\n" + raw;

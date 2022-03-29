@@ -2,12 +2,7 @@ import { Router } from "itty-router";
 import { fengyeLoader, gsouLoader, freeLoader } from "./loader.js";
 import { render, defaultNameRender } from "@tbxark/proxy-render/render.js";
 import { surgeFile, clashFile } from "@tbxark/proxy-render/template.js";
-import {
-  surgeRawConfigToProxies,
-  ssrBase64ToProxies,
-  trojanBase64ToProxies,
-  vmessBase64ToProxies,
-} from "@tbxark/proxy-render/http.js";
+import { fetchProxies } from "@tbxark/proxy-render/http.js";
 
 const router = Router();
 
@@ -18,29 +13,10 @@ const errorHandler = (error) => {
 };
 
 const customAirport = async (type, custom) => {
-  let [proxy, url] = JSON.parse(custom);
-  let rules = [];
-  switch (proxy) {
-    case "surge-ss": {
-      rules = await surgeRawConfigToProxies(url);
-      break;
-    }
-    case "ssr": {
-      rules = await ssrBase64ToProxies(url);
-      break;
-    }
-    case "trojan": {
-      rules = await trojanBase64ToProxies(url);
-      break;
-    }
-    case "vmess": {
-      rules = await vmessBase64ToProxies(url);
-      break;
-    }
-    default: {
-      break;
-    }
-  }
+  console.log(custom)
+  const [proxy, url] = JSON.parse(custom);
+  console.log(url)
+  const rules = await fetchProxies(proxy, url);
   return render(type, defaultNameRender, rules);
 };
 
@@ -112,12 +88,12 @@ router.get("/rule/:type", async ({ params, query }) => {
 
   if (custom) {
     const r = await customAirport(type, custom);
-    rules = rules.push(r);
+    rules.push(r);
   }
 
   if (free) {
     const freeRules = await freeLoader();
-    rules = rules.push(render(type, defaultNameRender, freeRules));
+    rules.push(render(type, defaultNameRender, freeRules));
   }
 
   if (type === "clash") {
