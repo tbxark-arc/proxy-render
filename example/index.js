@@ -2,6 +2,7 @@ import { Router } from "itty-router";
 import { fengyeLoader, gsouLoader, freeLoader } from "@tbxark/proxy-render/loader.js";
 import { render, defaultNameRender } from "@tbxark/proxy-render/render.js";
 import { surgeFile, clashFile } from "@tbxark/proxy-render/template.js";
+import { surgeRawConfigToProxies, ssrBase64ToProxies, trojanBase64ToProxies, vmessBase64ToProxies } from './http.js';
 
 const router = Router();
 
@@ -11,9 +12,37 @@ const errorHandler = (error) => {
     });
 };
 
+
+const customAirport = async (type, custom) => {
+    let [proxy, url] = JSON.parse(custom).map(i => encodeURIComponent(i));
+    let rules = []
+    switch (proxy) {
+        case 'surge-ss': {
+            rules = await surgeRawConfigToProxies(url)
+            break
+        }
+        case 'ssr': {
+            rules = await ssrBase64ToProxies(url)
+            break
+        }
+        case 'trojan': {
+            rules = await trojanBase64ToProxies(url)
+            break
+        }
+        case 'vmess': {
+            rules = await vmessBase64ToProxies(url)
+            break
+        }
+        default: {
+            break
+        }
+    }
+    return render(type, defaultNameRender, rules)
+}
+
 router.get("/rule/:type", async ({ params, query }) => {
     const { type } = params;
-    const { fy, gsou, free, ignoreCache } = query;
+    const { fy, gsou, free, custom, ignoreCache } = query;
     let rules = [];
     if (fy) {
 
@@ -67,6 +96,11 @@ router.get("/rule/:type", async ({ params, query }) => {
         };
         rules = rules.concat(render(type, nameRender, gsouRules));
     }
+
+    if (custom) {
+        const r = await customAirport(type, custom);
+        rules = rules.concat(r)
+    }   
 
     if (free) {
         const freeRules = await freeLoader();
@@ -125,4 +159,4 @@ addEventListener('scheduled', event => {
         // Update your proxies cache
         await fetch(Update_Cache_Url);
     })
-  })
+})
