@@ -60,7 +60,6 @@ RULE-SET,${git_domain}/DivineEngine/Profiles/master/Surge/Ruleset/StreamingMedia
 RULE-SET,${git_domain}/DivineEngine/Profiles/master/Surge/Ruleset/Global.list,Proxy
 # Extra
 RULE-SET,${git_domain}/DivineEngine/Profiles/master/Surge/Ruleset/Extra/Scholar.list,Proxy
-RULE-SET,${git_domain}/DivineEngine/Profiles/master/Surge/Ruleset/Extra/IP-Blackhole.list,Proxy
 RULE-SET,${git_domain}/DivineEngine/Profiles/master/Surge/Ruleset/Extra/Telegram/Telegram.list,Proxy
 RULE-SET,${git_domain}/DivineEngine/Profiles/master/Surge/Ruleset/Extra/Game/Steam.list,Proxy
 # China 中国直连
