@@ -73,7 +73,7 @@ export async function ssrBase64ToProxies(url) {
 }
 
 export async function trojanBase64ToProxies(url) {
-  let resp = await fetch(trojan);
+  let resp = await fetch(url);
   let text = await resp.text();
   return atob(text)
     .replace(/ /g, "")
