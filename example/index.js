@@ -14,7 +14,7 @@ const errorHandler = (error) => {
 
 
 const customAirport = async (type, custom) => {
-    let [proxy, url] = JSON.parse(custom).map(i => encodeURIComponent(i));
+    let [proxy, url] = JSON.parse(custom);
     let rules = []
     switch (proxy) {
         case 'surge-ss': {
