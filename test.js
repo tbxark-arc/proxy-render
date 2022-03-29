@@ -1,5 +1,5 @@
 import 'zx/globals'
-import { freeLoader } from './loader.js';
+import { freeLoader } from './example/loader.js';
 import { render, defaultNameRender } from './render.js';
 
 let proxies = await freeLoader()

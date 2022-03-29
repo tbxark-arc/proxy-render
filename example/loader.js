@@ -1,4 +1,4 @@
-import { surgeRawConfigToProxies, ssrBase64ToProxies, trojanBase64ToProxies, vmessBase64ToProxies } from './http.js';
+import { surgeRawConfigToProxies, ssrBase64ToProxies, trojanBase64ToProxies, vmessBase64ToProxies } from '@tbxark/proxy-render/http.js';
 
 
 export async function freeLoader() {
