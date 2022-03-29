@@ -55,7 +55,7 @@ export async function gsouLoader(authcode) {
     try {
         let vmess = `https://sub.gsou.world/link/${authcode}?sub=3&extend=1`
         vmess = await vmessBase64ToProxies(vmess)
-        res = res.concat(vmess)
+        res = res.concat(vmess.filter(c => c.config.class))
     } catch (error) {
         console.error(error)
     }
