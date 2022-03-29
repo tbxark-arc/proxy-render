@@ -2,7 +2,7 @@ import { Router } from "itty-router";
 import { fengyeLoader, gsouLoader, freeLoader } from "@tbxark/proxy-render/loader.js";
 import { render, defaultNameRender } from "@tbxark/proxy-render/render.js";
 import { surgeFile, clashFile } from "@tbxark/proxy-render/template.js";
-import { surgeRawConfigToProxies, ssrBase64ToProxies, trojanBase64ToProxies, vmessBase64ToProxies } from './http.js';
+import { surgeRawConfigToProxies, ssrBase64ToProxies, trojanBase64ToProxies, vmessBase64ToProxies } from '@tbxark/proxy-render/http.js';
 
 const router = Router();
 
