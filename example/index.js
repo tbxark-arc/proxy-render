@@ -44,6 +44,39 @@ router.get("/rule/:type", async ({ params, query }) => {
     const { type } = params;
     const { fy, gsou, free, custom, ignoreCache } = query;
     let rules = [];
+
+
+    if (gsou) {
+
+        let gsouRules = [];
+        const key = `proxies-gsou-${gsou}`;
+        if (!ignoreCache) {
+            try {
+                const raw = await Proxies_Cache.get(key);
+                gsouRules = JSON.parse(raw)
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        if (gsouRules == null || !gsouRules.length) {
+            gsouRules = await await gsouLoader(gsou);
+            await Proxies_Cache.put(key, JSON.stringify(gsouRules))
+        }
+
+        const nameRender = (proxy) => {
+            if (proxy.type === "vmess") {
+                return "GS-" + proxy.config.remark.replace(/ /g, '').replace("-v2ray", "").replace("-v2ray", "")
+            } else {
+                let name = proxy.config.host.split(".");
+                name.pop();
+                name.pop();
+                name = name.reverse().join("-");
+                return `GS-${proxy.type}-${name}-${proxy.config.port}`;
+            }
+        };
+        rules.push(render(type, nameRender, gsouRules));
+    }
+
     if (fy) {
 
         const [auth, port] = fy.split("-");
@@ -67,47 +100,24 @@ router.get("/rule/:type", async ({ params, query }) => {
             return `FY-${proxy.type}-${name}`;
         };
 
-        rules = rules.concat(render(type, nameRender, fyRules));
-    }
-
-    if (gsou) {
-
-        let gsouRules = [];
-        const key = `proxies-gsou-${gsou}`;
-        if (!ignoreCache) {
-            try {
-                const raw = await Proxies_Cache.get(key);
-                gsouRules = JSON.parse(raw)
-            } catch (e) {
-                console.log(e)
-            }
-        }
-        if (gsouRules == null || !gsouRules.length) {
-            gsouRules = await await gsouLoader(gsou);
-            await Proxies_Cache.put(key, JSON.stringify(gsouRules))
-        }
-
-        const nameRender = (proxy) => {
-            let name = proxy.config.host.split(".");
-            name.pop();
-            name.pop();
-            name = name.reverse();
-            return `FY-${proxy.type}-${name.join("-")}-${proxy.config.port}`;
-        };
-        rules = rules.concat(render(type, nameRender, gsouRules));
+        rules.push(render(type, nameRender, fyRules));
     }
 
     if (custom) {
         const r = await customAirport(type, custom);
-        rules = rules.concat(r)
+        rules = rules.push(r)
     }   
 
     if (free) {
         const freeRules = await freeLoader();
-        rules = rules.concat(render(type, defaultNameRender, freeRules));
+        rules = rules.push(render(type, defaultNameRender, freeRules));
     }
 
-    return new Response(rules.join('\n'));
+    if (type === "clash") {
+        return new Response("proxies:\n\n" + rules.map(r => r.replace("proxies:\n\n", "")).join('\n'));
+    } else {
+        return new Response(rules.join('\n'));
+    }
 });
 
 router.get("/config/:type", async ({ params, query }) => {

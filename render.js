@@ -2,18 +2,26 @@ const surge = (nameRender) => {
   return {
     ss: (proxy) => {
       const config = proxy.config;
-      return `${nameRender(proxy)} = ss, ${config.host}, ${config.port}, encrypt-method=${config.cipher}, password=${config.password}, obfs=${config.obfs}, obfs-host=${config.obfs_host}, udp-relay=true, tfo=true`;
+      return `${nameRender(proxy)} = ss, ${config.host}, ${
+        config.port
+      }, encrypt-method=${config.cipher}, password=${config.password}, obfs=${
+        config.obfs
+      }, obfs-host=${config.obfs_host}, udp-relay=true, tfo=true`;
     },
     ssr: (proxy) => {
       return null;
     },
     trojan: (proxy) => {
       const config = proxy.config;
-      return `${nameRender(proxy)} = trojan, ${config.host}, ${config.port}, password=${config.password}, sni=${config.sni}`;
+      return `${nameRender(proxy)} = trojan, ${config.host}, ${
+        config.port
+      }, password=${config.password}, sni=${config.sni}`;
     },
     vmess: (proxy) => {
       const config = proxy.config;
-      return `${nameRender(proxy)} = vmess, ${config.add}, ${config.port}, username=${config.id}, tfo=true`;
+      return `${nameRender(proxy)} = vmess, ${config.add}, ${
+        config.port
+      }, username=${config.id}, tfo=true`;
     },
   };
 };
@@ -104,15 +112,15 @@ export const render = (file, nameRender, proxies) => {
     .filter((c) => c != null)
     .join("\n");
 
-  if (file === 'clash') {
-      return 'proxies:\n\n' + raw
+  if (file === "clash") {
+    return "proxies:\n\n" + raw;
   }
-  return raw
+  return raw;
 };
 
 export const defaultNameRender = (proxy) => {
-    let name = proxy.config.host.split('.')
-    name.pop();
-    name = name.reverse()
-    return `${proxy.type.toUpperCase()}-${name.join('-')}`
-}
+  let name = proxy.config.host.split(".");
+  name.pop();
+  name = name.reverse();
+  return `${proxy.type.toUpperCase()}-${name.join("-")}`;
+};
