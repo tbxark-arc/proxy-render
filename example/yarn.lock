@@ -24,7 +24,7 @@
     fastq "^1.6.0"
 
 "@tbxark/proxy-render@file:..":
-  version "1.0.4"
+  version "1.0.5"
 
 "@types/fs-extra@^9.0.13":
   version "9.0.13"

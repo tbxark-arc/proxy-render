@@ -31,15 +31,15 @@ const clash = (nameRender) => {
     ss: (proxy) => {
       const config = proxy.config;
       return `
-    - name: "${nameRender(proxy)}"
-      type: ss
-      server: ${config.host}
-      port: ${config.port}
-      udp: true
-      cipher: ${config.cipher}
-      password: "${config.password}"
-      plugin: obfs
-      plugin-opts:
+  - name: "${nameRender(proxy)}"
+    type: ss
+    server: ${config.host}
+    port: ${config.port}
+    udp: true
+    cipher: ${config.cipher}
+    password: "${config.password}"
+    plugin: obfs
+    plugin-opts:
       mode: ${config.obfs}
       host: ${config.obfs_host}
       `;
@@ -47,40 +47,40 @@ const clash = (nameRender) => {
     ssr: (proxy) => {
       const config = proxy.config;
       return `
-    - name: "${nameRender(proxy)}"
-      type: ssr
-      server: ${config.host}
-      port: ${config.port}
-      udp: true
-      cipher: ${config.cipher}
-      password: "${config.password}"
-      obfs: plain
-      protocol: ${config.auth}
-      obfs-param: ${config.obfsparam}
-      protocol-param: ${config.protoparam}
+  - name: "${nameRender(proxy)}"
+    type: ssr
+    server: ${config.host}
+    port: ${config.port}
+    udp: true
+    cipher: ${config.cipher}
+    password: "${config.password}"
+    obfs: plain
+    protocol: ${config.auth}
+    obfs-param: ${config.obfsparam}
+    protocol-param: ${config.protoparam}
       `;
     },
     trojan: (proxy) => {
       const config = proxy.config;
       return `
-    - name: "${nameRender(proxy)}"
-      type: trojan
-      server: ${config.host}
-      port: ${config.port}
-      password: "${config.password}"
-      sni: ${config.sni}
+  - name: "${nameRender(proxy)}"
+    type: trojan
+    server: ${config.host}
+    port: ${config.port}
+    password: "${config.password}"
+    sni: ${config.sni}
       `;
     },
     vmess: (proxy) => {
       const config = proxy.config;
       return `
-    - name: "${nameRender(proxy)}"
-      type: vmess
-      server: ${config.add}
-      port: ${config.port}
-      uuid: ${config.id}
-      alterId: ${config.aid}
-      cipher: auto
+  - name: "${nameRender(proxy)}"
+    type: vmess
+    server: ${config.add}
+    port: ${config.port}
+    uuid: ${config.id}
+    alterId: ${config.aid}
+    cipher: auto
       `;
     },
   };

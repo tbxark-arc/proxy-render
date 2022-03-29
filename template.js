@@ -79,7 +79,7 @@ GEOIP,CN,China
 FINAL,Final,dns-failed    
 `
 }
-
+    
 export const clashFile = (policy_path, git_domain) => {
     return `
 mixed-port: 7890
@@ -89,14 +89,16 @@ mode: rule
 log-level: info
 ipv6: false
 external-controller: 127.0.0.1:9090
+
 dns:
-    enable: false
-    listen: 0.0.0.0:53
-    default-nameserver:
+  enable: false
+  listen: 0.0.0.0:53
+  default-nameserver:
     - 223.5.5.5
-    enhanced-mode: redir-host
-    fake-ip-range: 198.18.0.1/16
-    fake-ip-filter:
+  enhanced-mode: redir-host
+  fake-ip-range: 198.18.0.1/16
+
+  fake-ip-filter:
     - '*.lan'
     - localhost.ptlogin2.qq.com
     - '+.srv.nintendo.net'
@@ -106,60 +108,74 @@ dns:
     - '+.xboxlive.com'
     - 'msftconnecttest.com'
     - 'xbox.*.microsoft.com'
-    nameserver:
+
+  nameserver:
     - https://223.5.5.5/dns-query
-    fallback:
+
+  fallback:
     - https://1.1.1.1/dns-query
-    fallback-filter:
+
+  fallback-filter:
     geoip: true
+
 proxies:
+
+
 proxy-providers:
     online:
-    type: http
-    url: '${policy_path}'
-    interval: 3600
-    path: ./Proxy/clash-online.yaml
-    health-check:
-        enable: true
-        interval: 600
-        url: http://www.gstatic.com/generate_204
+        type: http
+        url: '${policy_path}'
+        interval: 3600
+        path: ./Proxy/clash-online.yaml
+        health-check:
+            enable: true
+            interval: 600
+            url: http://www.gstatic.com/generate_204
+		
 proxy-groups:
     - name: 'Proxy'
-        type: select
-        proxies:
-            - Best
-            - Fallback
-            - Select
-            - DIRECT
+      type: select
+      proxies:
+        - Best
+        - Fallback
+        - Select
+        - DIRECT
+
     - name: 'Final'
-        type: select
-        proxies:
-            - DIRECT
-            - Proxy
+      type: select
+      proxies:
+        - DIRECT
+        - Proxy
+
     - name: 'China'
-        type: select
-        proxies:
-            - DIRECT
-            - Proxy
+      type: select
+      proxies:
+        - DIRECT
+        - Proxy 
+
     - name: 'Block'
-        type: select
-        proxies:
-            - REJECT
-            - DIRECT
+      type: select
+      proxies:
+        - REJECT
+        - DIRECT
+
     - name: 'Best'
-        type: url-test
-        url: 'http://www.gstatic.com/generate_204'
-        interval: 300
-        use:
-            - online
+      type: url-test
+      url: 'http://www.gstatic.com/generate_204'
+      interval: 300
+      use:
+        - online
+
     - name: 'Fallback'
-        type: fallback
-        use:
-            - online
+      type: fallback
+      use:
+        - online
+
     - name: 'Select'
-        type: select
-        use:
-            - online
+      type: select
+      use:
+        - online
+
 rule-providers:
     Scholar:
         type: http
