@@ -1,8 +1,6 @@
 import { Router } from "itty-router";
-import { freeLoader } from "./loader.js";
-import { render, defaultNameRender } from "@tbxark/proxy-render/render.js";
 import { surgeFile, clashFile } from "@tbxark/proxy-render/template.js";
-import { fetchGsouProxies, fetchFyProxies, customAirport } from "./rule";
+import { fetchGsouProxies, fetchFyProxies, fetchCustomAirport, fetchFreeProxies } from "./rule.js";
 
 export const router = Router();
 
@@ -18,10 +16,10 @@ router.get("/rule/:type", async ({ params, query }) => {
     rules.push(await fetchFyProxies(fy, ignoreCache, type));
   }
   if (custom) {
-    rules.push(await customAirport(type, custom));
+    rules.push(await fetchCustomAirport(type, custom));
   }
   if (free) {
-    rules.push(render(type, defaultNameRender, await freeLoader()));
+    rules.push(await fetchFreeProxies(type));
   }
 
   if (type === "clash") {

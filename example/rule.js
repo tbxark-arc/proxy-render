@@ -1,12 +1,18 @@
-import { fengyeLoader, gsouLoader } from "./loader.js";
+import { fengyeLoader, gsouLoader, freeLoader } from "./loader.js";
 import { render, defaultNameRender } from "@tbxark/proxy-render/render.js";
 import { fetchProxies } from "@tbxark/proxy-render/http.js";
 
-export async function customAirport(type, custom) {
+
+export async function fetchFreeProxies(type) {
+  return render(type, defaultNameRender, await freeLoader())
+}
+
+export async function fetchCustomAirport(type, custom) {
   const [proxy, url] = JSON.parse(custom);
   const rules = await fetchProxies(proxy, url);
   return render(type, defaultNameRender, rules);
 }
+
 export async function fetchGsouProxies(gsou, ignoreCache, type) {
   let gsouRules = [];
   const key = `proxies-gsou-${gsou}`;
@@ -42,6 +48,7 @@ export async function fetchGsouProxies(gsou, ignoreCache, type) {
   };
   return render(type, nameRender, gsouRules);
 }
+
 export async function fetchFyProxies(fy, ignoreCache, type) {
   const [auth, port] = fy.split("-");
   const key = `proxies-fy-${auth}-${port}`;
