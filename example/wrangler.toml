@@ -1,0 +1,9 @@
+name = "proxies"
+type = "webpack"
+zone_id = "8bda68006471a165be89971064d746fd"
+account_id = "2b411d692aec0f9101d8d198315724e8"
+workers_dev = true
+vars = { DOMAIN = "proxies.tbxark.workers.dev", Clear_Cache_Url="" }
+kv_namespaces = [ 
+  { binding = "Proxies_Cache", id = "e814976723ae435b8ef8e1a440c3c746", preview_id = "e814976723ae435b8ef8e1a440c3c746" }
+]

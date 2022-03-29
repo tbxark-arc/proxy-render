@@ -1,0 +1,19 @@
+{
+  "name": "proxy-fetcher",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "wrangler dev"
+  },
+  "author": "TBXark",
+  "license": "ISC",
+  "dependencies": {
+    "@tbxark/proxy-render": "file:../",
+    "itty-router": "^2.6.0"
+  },
+  "devDependencies": {
+    "zx": "^6.0.7"
+  }
+}
