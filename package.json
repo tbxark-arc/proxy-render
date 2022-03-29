@@ -6,6 +6,13 @@
   "scripts": {
     "test": "node  --experimental-modules test.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TBXark/proxy-render"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "author": "TBXark",
   "license": "MIT",
   "devDependencies": {
