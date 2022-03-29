@@ -6,94 +6,22 @@ import { fetchProxies } from "@tbxark/proxy-render/http.js";
 
 const router = Router();
 
-const errorHandler = (error) => {
-  return new Response(error.message || "Server Error", {
-    status: error.status || 500,
-  });
-};
-
-const customAirport = async (type, custom) => {
-  console.log(custom)
-  const [proxy, url] = JSON.parse(custom);
-  console.log(url)
-  const rules = await fetchProxies(proxy, url);
-  return render(type, defaultNameRender, rules);
-};
-
 router.get("/rule/:type", async ({ params, query }) => {
   const { type } = params;
   const { fy, gsou, free, custom, ignoreCache } = query;
   let rules = [];
 
   if (gsou) {
-    let gsouRules = [];
-    const key = `proxies-gsou-${gsou}`;
-    if (!ignoreCache) {
-      try {
-        const raw = await Proxies_Cache.get(key);
-        gsouRules = JSON.parse(raw);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    if (gsouRules == null || !gsouRules.length) {
-      gsouRules = await await gsouLoader(gsou);
-      await Proxies_Cache.put(key, JSON.stringify(gsouRules));
-    }
-
-    const nameRender = (proxy) => {
-      if (proxy.type === "vmess") {
-        return (
-          "GS-" +
-          proxy.config.remark
-            .replace(/ /g, "")
-            .replace("-v2ray", "")
-            .replace("-v2ray", "")
-        );
-      } else {
-        let name = proxy.config.host.split(".");
-        name.pop();
-        name.pop();
-        name = name.reverse().join("-");
-        return `GS-${proxy.type}-${name}-${proxy.config.port}`;
-      }
-    };
-    rules.push(render(type, nameRender, gsouRules));
+    rules.push(await fetchGsouProxies(gsou, ignoreCache, type));
   }
-
   if (fy) {
-    const [auth, port] = fy.split("-");
-    const key = `proxies-fy-${auth}-${port}`;
-    let fyRules = null;
-    if (!ignoreCache) {
-      try {
-        const raw = await Proxies_Cache.get(key);
-        fyRules = JSON.parse(raw);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    if (fyRules == null || !fyRules.length) {
-      fyRules = await fengyeLoader(auth, port);
-      await Proxies_Cache.put(key, JSON.stringify(fyRules));
-    }
-
-    const nameRender = (proxy) => {
-      let name = proxy.config.host.split(".")[0];
-      return `FY-${proxy.type}-${name}`;
-    };
-
-    rules.push(render(type, nameRender, fyRules));
+    rules.push(await fetchFyProxies(fy, ignoreCache, type));
   }
-
   if (custom) {
-    const r = await customAirport(type, custom);
-    rules.push(r);
+    rules.push(await customAirport(type, custom));
   }
-
   if (free) {
-    const freeRules = await freeLoader();
-    rules.push(render(type, defaultNameRender, freeRules));
+    rules.push(render(type, defaultNameRender, await freeLoader()));
   }
 
   if (type === "clash") {
@@ -154,3 +82,76 @@ addEventListener("scheduled", (event) => {
     await fetch(Update_Cache_Url);
   });
 });
+
+function errorHandler(error) {
+  return new Response(error.message || "Server Error", {
+    status: error.status || 500,
+  });
+}
+
+async function customAirport(type, custom) {
+  const [proxy, url] = JSON.parse(custom);
+  const rules = await fetchProxies(proxy, url);
+  return render(type, defaultNameRender, rules);
+}
+
+async function fetchGsouProxies(gsou, ignoreCache, type) {
+  let gsouRules = [];
+  const key = `proxies-gsou-${gsou}`;
+  if (!ignoreCache) {
+    try {
+      const raw = await Proxies_Cache.get(key);
+      gsouRules = JSON.parse(raw);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  if (gsouRules == null || !gsouRules.length) {
+    gsouRules = await gsouLoader(gsou);
+    await Proxies_Cache.put(key, JSON.stringify(gsouRules));
+  }
+
+  const nameRender = (proxy) => {
+    if (proxy.type === "vmess") {
+      return (
+        "GS-" +
+        proxy.config.remark
+          .replace(/ /g, "")
+          .replace("-v2ray", "")
+          .replace("-v2ray", "")
+      );
+    } else {
+      let name = proxy.config.host.split(".");
+      name.pop();
+      name.pop();
+      name = name.reverse().join("-");
+      return `GS-${proxy.type}-${name}-${proxy.config.port}`;
+    }
+  };
+  return render(type, nameRender, gsouRules);
+}
+
+async function fetchFyProxies(fy, ignoreCache, type) {
+  const [auth, port] = fy.split("-");
+  const key = `proxies-fy-${auth}-${port}`;
+  let fyRules = null;
+  if (!ignoreCache) {
+    try {
+      const raw = await Proxies_Cache.get(key);
+      fyRules = JSON.parse(raw);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+  if (fyRules == null || !fyRules.length) {
+    fyRules = await fengyeLoader(auth, port);
+    await Proxies_Cache.put(key, JSON.stringify(fyRules));
+  }
+
+  const nameRender = (proxy) => {
+    let name = proxy.config.host.split(".")[0];
+    return `FY-${proxy.type}-${name}`;
+  };
+
+  return render(type, nameRender, fyRules);
+}

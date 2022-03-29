@@ -1,4 +1,4 @@
-const surge = (nameRender) => {
+function surge(nameRender) {
   return {
     ss: (proxy) => {
       const config = proxy.config;
@@ -26,7 +26,7 @@ const surge = (nameRender) => {
   };
 };
 
-const clash = (nameRender) => {
+function clash(nameRender) {
   return {
     ss: (proxy) => {
       const config = proxy.config;
@@ -86,7 +86,7 @@ const clash = (nameRender) => {
   };
 };
 
-export const render = (file, nameRender, proxies) => {
+export function render(file, nameRender, proxies) {
   let r = file === "clash" ? clash : surge;
   r = r(nameRender);
   const raw = proxies
@@ -118,9 +118,20 @@ export const render = (file, nameRender, proxies) => {
   return raw;
 };
 
-export const defaultNameRender = (proxy) => {
+export function makeID(length) {
+  let result           = '';
+  const characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const charactersLength = characters.length;
+  for ( let i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+ }
+ return result;
+}
+
+
+export function defaultNameRender(proxy) {
   let name = proxy.config.host.split(".");
   name.pop();
   name = name.reverse();
-  return `${proxy.type.toUpperCase()}-${name.join("-")}`;
+  return `${proxy.type.toUpperCase()}-${name.join("-")}-${makeID(2)}`;
 };

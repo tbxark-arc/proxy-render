@@ -1,4 +1,4 @@
-export const surgeFile = (policy_path, git_domain) => {
+export function surgeFile(policy_path, git_domain)  {
     return `
 [General]
 loglevel = warning
@@ -80,7 +80,7 @@ FINAL,Final,dns-failed
 `
 }
     
-export const clashFile = (policy_path, git_domain) => {
+export function clashFile(policy_path, git_domain) {
     return `
 mixed-port: 7890
 allow-lan: false
