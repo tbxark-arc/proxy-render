@@ -78,9 +78,7 @@ router.get("/rule/:type", async ({ params, query }) => {
 
 router.get("/config/:type", async ({ params, query }) => {
     const { type } = params;
-    const policy_path = `https://${DOMAIN}/rule/${type}?${Object.entries(
-        query
-    ).map(([k, v]) => `${k}=${v}`)}`;
+    const policy_path = `https://${DOMAIN}/rule/${type}?${Object.entries(query).map(([k, v]) => `${k}=${v}`).join("&")}`;
     const git_domain = `https://${DOMAIN}/git`;
     const text =
         type === "clash"
