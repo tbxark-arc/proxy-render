@@ -81,7 +81,7 @@ const clash = (nameRender) => {
 export const render = (file, nameRender, proxies) => {
   let r = file === "clash" ? clash : surge;
   r = r(nameRender);
-  return proxies
+  const raw = proxies
     .map((c) => {
       switch (c.type) {
         case "ss": {
@@ -103,6 +103,11 @@ export const render = (file, nameRender, proxies) => {
     })
     .filter((c) => c != null)
     .join("\n");
+
+  if (file === 'clash') {
+      return 'proxies:\n\n' + raw
+  }
+  return raw
 };
 
 export const defaultNameRender = (proxy) => {
