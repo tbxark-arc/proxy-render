@@ -124,7 +124,7 @@ addEventListener("fetch", (event) =>
 
 addEventListener('scheduled', event => {
     event.waitUntil(async (e) => {
-        // Clear your proxies cache
-        await fetch(Clear_Cache_Url);
+        // Update your proxies cache
+        await fetch(Update_Cache_Url);
     })
   })
