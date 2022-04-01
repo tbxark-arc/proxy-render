@@ -130,8 +130,6 @@ export function makeID(length) {
 
 
 export function defaultNameRender(proxy) {
-  let name = proxy.config.host.split(".");
-  name.pop();
-  name = name.reverse();
+  const name = proxy.config.host.split(".").slice(1).reverse();
   return `${proxy.type.toUpperCase()}-${name.join("-")}-${makeID(2)}`;
 };

@@ -39,10 +39,7 @@ export async function fetchGsouProxies(gsou, ignoreCache, type) {
           .replace("-v2ray", "")
       );
     } else {
-      let name = proxy.config.host.split(".");
-      name.pop();
-      name.pop();
-      name = name.reverse().join("-");
+      const name = proxy.config.host.split(".").slice(2).reverse().join("-");
       return `GS-${proxy.type}-${name}-${proxy.config.port}`;
     }
   };
