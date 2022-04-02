@@ -5,8 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "publish": "wrangler publish"
+    "dev": "wrangler dev -c wrangler-release.toml",
+    "publish": "wrangler publish -c wrangler-release.toml"
   },
   "author": "TBXark",
   "license": "ISC",

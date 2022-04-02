@@ -9,3 +9,4 @@ worker/
 node_modules/
 .idea/
 .cargo-ok
+wrangler-release.toml

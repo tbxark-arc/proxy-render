@@ -1,4 +1,4 @@
-import {createRouter, errorHandler} from './lib/router.js';
+import {createRouter, errorHandler} from './router.js';
 
 addEventListener('fetch', (event) => {
   const router = createRouter(ProxiesCache);
