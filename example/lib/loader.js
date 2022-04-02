@@ -3,13 +3,13 @@ import {
   ssrBase64ToProxies,
   trojanBase64ToProxies,
   vmessBase64ToProxies,
-} from "@tbxark/proxy-render/http.js";
+} from '@tbxark/proxy-render/lib/http.js';
 
 export async function freeLoader() {
   let res = [];
 
   try {
-    let vmess = "https://raw.githubusercontent.com/freefq/free/master/v2";
+    let vmess = 'https://raw.githubusercontent.com/freefq/free/master/v2';
     vmess = await vmessBase64ToProxies(vmess);
     res = res.concat(vmess);
   } catch (error) {

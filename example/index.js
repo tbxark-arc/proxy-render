@@ -1,18 +1,13 @@
-import { router } from "./router.js";
+import {createRouter, errorHandler} from './lib/router.js';
 
-function errorHandler(error) {
-  return new Response(error.message || "Server Error", {
-    status: error.status || 500,
-  });
-}
-
-addEventListener("fetch", (event) =>
-  event.respondWith(router.handle(event.request).catch(errorHandler))
+addEventListener('fetch', (event) => {
+  const router = createRouter(ProxiesCache);
+  event.respondWith(router.handle(event.request).catch(errorHandler));
+},
 );
 
-addEventListener("scheduled", (event) => {
+addEventListener('scheduled', (event) => {
   event.waitUntil(async (e) => {
-    // Update your proxies cache
-    await fetch(Update_Cache_Url);
+    await fetch(UPDATE_CACHE_URL);
   });
 });

@@ -1,7 +1,7 @@
-import "zx/globals";
-import { freeLoader } from "./example/loader.js";
-import { render, defaultNameRender } from "./render.js";
+import 'zx/globals';
+import {freeLoader} from './example/lib/loader.js';
+import {render, defaultNameRender} from './lib/render.js';
 
-let proxies = await freeLoader();
-const clash = render("clash", defaultNameRender, proxies);
+const proxies = await freeLoader();
+const clash = render('clash', defaultNameRender, proxies);
 console.log(clash);

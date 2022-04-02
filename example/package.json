@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "wrangler dev"
+    "dev": "wrangler dev",
+    "publish": "wrangler publish"
   },
   "author": "TBXark",
   "license": "ISC",
