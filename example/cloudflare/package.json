@@ -11,7 +11,6 @@
   "author": "TBXark",
   "license": "ISC",
   "dependencies": {
-    "@tbxark/proxy-render": "file:..",
     "itty-router": "^2.6.0"
   }
 }

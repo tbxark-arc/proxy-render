@@ -19,7 +19,7 @@ export async function fetchGsouProxies(gsou, ignoreCache, type, cache) {
   if (!ignoreCache && cache) {
     try {
       const raw = await cache.get(key);
-      gsouRules = JSON.parse(raw);
+      gsouRules = raw ? JSON.parse(raw) : null;
     } catch (e) {
       console.log(e);
     }
@@ -55,7 +55,7 @@ export async function fetchFyProxies(fy, ignoreCache, type, cache) {
   if (!ignoreCache && cache) {
     try {
       const raw = await cache.get(key);
-      fyRules = JSON.parse(raw);
+      fyRules = raw ? JSON.parse(raw) : null;
     } catch (e) {
       console.log(e);
     }
