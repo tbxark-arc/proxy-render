@@ -10,7 +10,7 @@
   "author": "TBXark",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^3.2.3",
+    "cloudflare-worker-adapter": "https://github.com/TBXark/cloudflare-worker-adapter.git",
     "proxy-server-core": "../core"
   }
 }
