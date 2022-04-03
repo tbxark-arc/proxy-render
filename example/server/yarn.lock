@@ -7,7 +7,7 @@
 
 "cloudflare-worker-adapter@https://github.com/TBXark/cloudflare-worker-adapter.git":
   version "1.0.0"
-  resolved "https://github.com/TBXark/cloudflare-worker-adapter.git#339b9dfd293a61e27a038dfcf0f336e49d52e5d7"
+  resolved "https://github.com/TBXark/cloudflare-worker-adapter.git#ae051f23517c8086da5bcca59b87e8dfb2ce4639"
   dependencies:
     commander "^9.1.0"
     node-fetch "^3.2.3"
