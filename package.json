@@ -4,7 +4,6 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "test": "node  --experimental-modules test.js",
     "lint": "eslint --fix --ext .js,.jsx,.mjs ."
   },
   "repository": {
