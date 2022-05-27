@@ -2,14 +2,16 @@
 # yarn lockfile v1
 
 
-"itty-router@^2.6.0":
-  "integrity" "sha512-l9gxWe5TOLUESYnBn85Jxd6tIZLWdRX5YKkHIBfSgbNQ7UFPNUGuWihRV+LlEbfJJIzgLmhwAbaWRi5yWJm8kg=="
-  "resolved" "https://registry.npmjs.org/itty-router/-/itty-router-2.6.1.tgz"
-  "version" "2.6.1"
+"@tbxark/proxy-render@../..":
+  version "1.1.0"
 
-"proxy-server-core@../core":
-  "resolved" "file:../core"
-  "version" "1.0.0"
+itty-router@^2.6.0, itty-router@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.npmjs.org/itty-router/-/itty-router-2.6.1.tgz"
+  integrity sha512-l9gxWe5TOLUESYnBn85Jxd6tIZLWdRX5YKkHIBfSgbNQ7UFPNUGuWihRV+LlEbfJJIzgLmhwAbaWRi5yWJm8kg==
+
+proxy-server-core@../core:
+  version "1.0.0"
   dependencies:
     "@tbxark/proxy-render" "../.."
-    "itty-router" "^2.6.1"
+    itty-router "^2.6.1"
