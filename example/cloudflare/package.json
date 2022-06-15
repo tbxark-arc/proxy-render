@@ -6,8 +6,8 @@
   "type": "module",
   "scripts": {
     "login": "wrangler login",
-    "build": "webpack --config webpack.config.cjs",
-    "publish": "wrangler publish ./dist/main.js -c wrangler-release.toml"
+    "dev": "webpack --config webpack.config.cjs & wrangler dev ./dist/main.js -c wrangler-release.toml",
+    "publish": "webpack --config webpack.config.cjs & wrangler publish ./dist/main.js -c wrangler-release.toml"
   },
   "author": "TBXark",
   "license": "ISC",
