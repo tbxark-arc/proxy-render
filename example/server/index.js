@@ -1,7 +1,7 @@
-import { bindGlobal, startServer, MemoryCache  } from 'cloudflare-worker-adapter';
+import {bindGlobal, startServer, MemoryCache} from 'cloudflare-worker-adapter';
 import {createRouter, errorHandler} from 'proxy-server-core/router.js';
 
-bindGlobal({ 
+bindGlobal({
   ProxiesCache: new MemoryCache(),
 });
 
