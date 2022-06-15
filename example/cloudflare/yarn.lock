@@ -815,7 +815,6 @@ itty-router@^2.6.0, itty-router@^2.6.1:
   resolved "https://registry.npmjs.org/itty-router/-/itty-router-2.6.1.tgz"
   integrity sha512-l9gxWe5TOLUESYnBn85Jxd6tIZLWdRX5YKkHIBfSgbNQ7UFPNUGuWihRV+LlEbfJJIzgLmhwAbaWRi5yWJm8kg==
 
-<<<<<<< HEAD
 jest-worker@^27.4.5:
   version "27.5.1"
   resolved "https://registry.yarnpkg.com/jest-worker/-/jest-worker-27.5.1.tgz#8d146f0900e8973b106b6f73cc1e9a8cb86f8db0"
@@ -986,14 +985,11 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-=======
->>>>>>> adad63e6bfe4888bffb11e5e1adcb6bc85f95f86
 proxy-server-core@../core:
   version "1.0.0"
   dependencies:
     "@tbxark/proxy-render" "../.."
     itty-router "^2.6.1"
-<<<<<<< HEAD
 
 punycode@^2.1.0:
   version "2.1.1"
@@ -1317,5 +1313,3 @@ youch@^2.2.2:
     cookie "^0.4.1"
     mustache "^4.2.0"
     stack-trace "0.0.10"
-=======
->>>>>>> adad63e6bfe4888bffb11e5e1adcb6bc85f95f86
