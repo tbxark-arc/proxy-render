@@ -1,10 +1,13 @@
 import {fengyeLoader, gsouLoader, freeLoader} from './loader.js';
-import {render, defaultNameRender} from '@tbxark/proxy-render/lib/render.js';
+import {render, defaultNameRender, makeID} from '@tbxark/proxy-render/lib/render.js';
 import {fetchProxies} from '@tbxark/proxy-render/lib/http.js';
 
 
 export async function fetchFreeProxies(type) {
-  return render(type, defaultNameRender, await freeLoader());
+  const nameRender = () => {
+    return `free-${makeID(10)}`
+  }
+  return render(type, nameRender, await freeLoader());
 }
 
 export async function fetchCustomAirport(type, custom) {
