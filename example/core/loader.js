@@ -52,9 +52,9 @@ export async function gsouLoader(authcode) {
     let ssr = `https://sub.gsou.world/link/${authcode}?sub=1&extend=1`;
     ssr = await ssrBase64ToProxies(ssr);
     res = res.concat(ssr.filter((c) => c.config.obfsparam));
-    res.forEach(c => {
-      c.config.obfs = 'tls1.2_ticket_auth'
-    })
+    res.forEach((c) => {
+      c.config.obfs = 'tls1.2_ticket_auth';
+    });
   } catch (error) {
     console.error(error);
   }

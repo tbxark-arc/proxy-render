@@ -5,8 +5,8 @@ import {fetchProxies} from '@tbxark/proxy-render/lib/http.js';
 
 export async function fetchFreeProxies(type) {
   const nameRender = () => {
-    return `free-${makeID(10)}`
-  }
+    return `free-${makeID(10)}`;
+  };
   return render(type, nameRender, await freeLoader());
 }
 
