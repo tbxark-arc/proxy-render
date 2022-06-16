@@ -1,4 +1,4 @@
-import {createRouter, errorHandler} from 'proxy-server-core/router.js';
+import {createRouter, errorHandler} from './http/router.js';
 
 addEventListener('fetch', (event) => {
   const router = createRouter(ProxiesCache);

@@ -1,7 +1,7 @@
 import {
   surgeFile,
   clashFile,
-} from '@tbxark/proxy-render/lib/template.js';
+} from '../../template.js';
 import {
   fetchGsouProxies,
   fetchFyProxies,

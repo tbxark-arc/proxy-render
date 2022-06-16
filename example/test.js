@@ -1,5 +1,5 @@
-import {freeLoader} from 'proxy-server-core/loader.js';
-import {render, defaultNameRender} from '@tbxark/proxy-render/lib/render.js';
+import {freeLoader} from './http/loader.js';
+import {render, defaultNameRender} from '@tbxark/proxy-render/render.js';
 import fetch from 'node-fetch';
 
 global.fetch = fetch;

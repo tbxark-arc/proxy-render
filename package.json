@@ -14,12 +14,12 @@
     "registry": "https://npm.pkg.github.com"
   },
   "files": [
-    "lib/**/*.js"
+    "*.js"
   ],
   "author": "TBXark",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^8.12.0",
+    "eslint": ">=5.16.0",
     "eslint-config-google": "^0.14.0"
   }
 }

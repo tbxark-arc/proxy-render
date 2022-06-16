@@ -108,7 +108,7 @@ export async function trojanBase64ToProxies(url) {
 export async function vmessBase64ToProxies(url) {
   const resp = await fetch(url);
   const text = await resp.text();
-  const regx = new RegExp('\w{8}-\w{4}-\w{4}-\w{4}-\w{12}');
+  const regx = /\w{8}-\w{4}-\w{4}-\w{4}-\w{12}/;
   return atob(text)
       .split('\n')
       .map((l) => {
