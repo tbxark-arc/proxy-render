@@ -28,7 +28,7 @@ yarn run login
 yarn run publish
 ```
 
-### Deploy to local server
+### Serve on local
 ```shell
 cd example
 yarn
