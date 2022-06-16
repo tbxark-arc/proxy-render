@@ -23,7 +23,7 @@ You can refer to the [example](example) for more details.
 ```shell
 cd example
 yarn
-cp wrangler.toml wrangler-release.toml // edit your config in wrangler-release.toml
+cp wrangler.toml wrangler-release.toml # and editwrangler-release.toml  
 yarn run login
 yarn run publish
 ```
