@@ -23,12 +23,12 @@ You can refer to the [example](example) for more details.
 ```shell
 cd example
 yarn
-cp wrangler.toml wrangler-release.toml // edit your config in wrangler-release.toml
+cp wrangler.toml wrangler-release.toml # and edit wrangler-release.toml  
 yarn run login
 yarn run publish
 ```
 
-### Deploy to local server
+### Serve on local
 ```shell
 cd example
 yarn
