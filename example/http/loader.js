@@ -3,7 +3,7 @@ import {
   ssrBase64ToProxies,
   trojanBase64ToProxies,
   vmessBase64ToProxies,
-} from '../../http.js';
+} from '../../src/http.js';
 
 export async function freeLoader() {
   let res = [];

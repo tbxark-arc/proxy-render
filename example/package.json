@@ -6,9 +6,9 @@
   "type": "module",
   "scripts": {
     "login": "wrangler login",
-    "local": "node index.js",
+    "local": "node local.js",
     "test": "node test.js",
-    "build": "esbuild index.js  --bundle --outfile=./dist/main.js",
+    "build": "esbuild index.js --bundle --outfile=./dist/main.js",
     "dev": "npm run build & wrangler dev ./dist/main.js -c wrangler-release.toml",
     "publish": "npm run build & wrangler publish ./dist/main.js -c wrangler-release.toml"
   },

@@ -1,6 +1,6 @@
 import {fengyeLoader, gsouLoader, freeLoader} from './loader.js';
-import {render, defaultNameRender, makeID} from '../../render.js';
-import {fetchProxies} from '../../http.js';
+import {render, defaultNameRender, makeID} from '../../src/render.js';
+import {fetchProxies} from '../../src/http.js';
 
 
 export async function fetchFreeProxies(type) {

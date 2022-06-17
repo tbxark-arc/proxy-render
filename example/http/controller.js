@@ -1,7 +1,7 @@
 import {
   surgeFile,
   clashFile,
-} from '../../template.js';
+} from '../../src/template.js';
 import {
   fetchGsouProxies,
   fetchFyProxies,
