@@ -1,6 +1,4 @@
 name = "proxies"
-type = "webpack"
-zone_id = ""
 account_id = ""
 workers_dev = true
 vars = { DOMAIN = "", UPDATE_CACHE_URL="" }
