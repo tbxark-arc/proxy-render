@@ -87,23 +87,20 @@ function clash(nameRender) {
   };
 };
 
-function quantumultx(nameRender) {
+function loon(nameRender) {
   return {
     vmess: (proxy) => {
       const config = proxy.config;
-      return `vmess = ${config.add}:${config.port}, method=none, password=${config.id}, aead=false, fast-open=false, udp-relay=true, tag=${nameRender(proxy)}`
+      return `${nameRender(proxy)} = vmess,${config.add},${config.port},chacha20-ietf-poly1305,"${config.id}",transport=tcp,alterId=0,path=/,host=${config.add},over-tls=true,tls-name=${config.add}`
     },
     trojan: (proxy) => {
-      const config = proxy.config;
-      return `trojan = ${config.host}:${config.port}, password=${config.password}, sni=${config.sni}, tag=${nameRender(proxy)}`
+      return null
     },
     ssr: (proxy) => {
-      const config = proxy.config;
-      return `ssr = ${config.host}:${config.port}, method=${config.cipher}, password=${config.password}, obfs=${config.obfs}, obfs-host=${config.obfsparam}, udp-relay=true, tag=${nameRender(proxy)}`
+      return null
     },
     ss: (proxy) => {
-      const config = proxy.config;
-      return `ss = ${config.host}:${config.port}, method=${config.cipher}, password=${config.password}, fast-open=false, udp-relay=true, tag=${nameRender(proxy)}`
+      return null
     }
   }
 }
@@ -114,8 +111,8 @@ export function render(file, nameRender, proxies) {
     case 'surge':
       r = surge(nameRender);
       break;
-    case 'quantumultx':
-      r = quantumultx(nameRender);
+    case 'loon':
+      r = loon(nameRender);
       break;
     case 'clash':
       r = clash(nameRender);
