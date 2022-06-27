@@ -97,7 +97,8 @@ function loon(nameRender) {
       return null
     },
     ssr: (proxy) => {
-      return null
+      const config = proxy.config;
+      return `${nameRender(proxy)} = ShadowsocksR,${config.add},${config.port}, ${config.cipher},"${config.password}",protocol=${config.auth},protocol-param=${config.protoparam},obfs=${config.obfs || 'plain'},fast-open=true,udp=true`
     },
     ss: (proxy) => {
       return null
