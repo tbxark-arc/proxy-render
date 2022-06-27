@@ -87,9 +87,43 @@ function clash(nameRender) {
   };
 };
 
+function quantumultx(nameRender) {
+  return {
+    vmess: (proxy) => {
+      const config = proxy.config;
+      return `vmess = ${config.add}:${config.port}, method=none, password=${config.id}, aead=false, fast-open=false, udp-relay=true, tag=${nameRender(proxy)}`
+    },
+    trojan: (proxy) => {
+      const config = proxy.config;
+      return `trojan = ${config.host}:${config.port}, password=${config.password}, sni=${config.sni}, tag=${nameRender(proxy)}`
+    },
+    ssr: (proxy) => {
+      const config = proxy.config;
+      return `ssr = ${config.host}:${config.port}, method=${config.cipher}, password=${config.password}, obfs=${config.obfs}, obfs-host=${config.obfsparam}, udp-relay=true, tag=${nameRender(proxy)}`
+    },
+    ss: (proxy) => {
+      const config = proxy.config;
+      return `ss = ${config.host}:${config.port}, method=${config.cipher}, password=${config.password}, fast-open=false, udp-relay=true, tag=${nameRender(proxy)}`
+    }
+  }
+}
+
 export function render(file, nameRender, proxies) {
-  let r = file === 'clash' ? clash : surge;
-  r = r(nameRender);
+  let r = null
+  switch (file.toLowerCase()) {
+    case 'surge':
+      r = surge(nameRender);
+      break;
+    case 'quantumultx':
+      r = quantumultx(nameRender);
+      break;
+    case 'clash':
+      r = clash(nameRender);
+      break;
+    default:
+      r = surge(nameRender);
+      break;
+  }
   const raw = proxies
       .map((c) => {
         switch (c.type) {
