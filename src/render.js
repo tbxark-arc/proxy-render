@@ -87,33 +87,11 @@ function clash(nameRender) {
   };
 };
 
-function loon(nameRender) {
-  return {
-    vmess: (proxy) => {
-      const config = proxy.config;
-      return `${nameRender(proxy)} = vmess,${config.add},${config.port},chacha20-ietf-poly1305,"${config.id}",transport=tcp,alterId=0,path=/,host=${config.add},over-tls=true,tls-name=${config.add}`
-    },
-    trojan: (proxy) => {
-      return null
-    },
-    ssr: (proxy) => {
-      const config = proxy.config;
-      return `${nameRender(proxy)} = ShadowsocksR,${config.add},${config.port}, ${config.cipher},"${config.password}",protocol=${config.auth},protocol-param=${config.protoparam},obfs=${config.obfs || 'plain'},fast-open=true,udp=true`
-    },
-    ss: (proxy) => {
-      return null
-    }
-  }
-}
-
 export function render(file, nameRender, proxies) {
   let r = null
   switch (file.toLowerCase()) {
     case 'surge':
       r = surge(nameRender);
-      break;
-    case 'loon':
-      r = loon(nameRender);
       break;
     case 'clash':
       r = clash(nameRender);

@@ -47,7 +47,6 @@ export async function fengyeLoader(authcode, port) {
 
 export async function gsouLoader(authcode) {
   let res = [];
-
   try {
     let ssr = `https://sub.gsou.world/link/${authcode}?sub=1&extend=1`;
     ssr = await ssrBase64ToProxies(ssr);
