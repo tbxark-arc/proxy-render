@@ -40,14 +40,26 @@ export async function fetchGsouProxies(gsou, ignoreCache, type, cache) {
         'GS-' +
         proxy.config.remark
             .replace(/ /g, '')
-            .replace('-v2ray', '')
-            .replace('-v2ray', '')
+            .replace('VIP-v2ray', 'v1')
+            .replace('v2ray', 'v2')
       );
     } else {
       const name = proxy.config.host.split('.').slice(2).reverse().join('-');
       return `GS-${proxy.type}-${name}-${proxy.config.port}`;
     }
   };
+  // sort by name
+  gsouRules = gsouRules.sort((a, b) => {
+    const nameA = nameRender(a).toUpperCase();
+    const nameB = nameRender(b).toUpperCase();
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
   return render(type, nameRender, gsouRules);
 }
 
